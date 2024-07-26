@@ -54,8 +54,7 @@ graylog_snapshot_tgz_file = str(args.tgz)
 #                       v Color
 #                       v v  Background
 #                       v v  v
-defText         = "\033[0;30;50m"       # Black
-boldText        = "\033[1;30;50m"       # Black
+defText         = "\033[0m"             # No Color
 alertText       = "\033[1;33;50m"       # yellow
 errorText       = "\033[1;31;50m"       # red
 successText     = "\033[1;32;50m"       # green
