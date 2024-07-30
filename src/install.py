@@ -272,7 +272,7 @@ def do_wait_until_online():
     iSocketRetries = 0
     iSocketInitialRetryBackOff = iSocketRetryWaitSec
 
-    print("do_wait_until_online")
+    # print("do_wait_until_online")
 
     import json
     while iSocketRetries < iSocketMaxRetries:
