@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # simple script to handle an install of a graylog snapshot via .tgz
 # https://jenkins.ci.torch.sh/job/Graylog-Snapshots/job/graylog2-server/job/master/
 
