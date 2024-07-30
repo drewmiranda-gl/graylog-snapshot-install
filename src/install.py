@@ -367,7 +367,7 @@ def erase_mongodb():
     print("program output:", out)
 
 def erase_opensearch():
-    print(alertText + "Deleting OpenSearch indices " + blueText + "_all" + defText)
+    print(alertText + "Deleting OpenSearch ALL OpenSearch data...")
     
     if args.wait_for_opensearch == True:
         print(alertText + "waiting until OpenSearch is online..." + defText)
