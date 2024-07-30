@@ -374,8 +374,9 @@ def erase_opensearch():
         do_wait_for_indexer()
 
     if args.debug == False:
-        x = requests.delete('http://127.0.0.1:9200/_all')
-        print(x.text)
+        # x = requests.delete('http://127.0.0.1:9200/_all')
+        # print(x.text)
+        exec_w_stdout("bash cleanup-erase-opensearch.sh", True, True)
 
 def download_file_via_github(arg_url, arg_out_file):
     print("Downloading latest: " + blueText + arg_out_file + defText + " (via github)")
