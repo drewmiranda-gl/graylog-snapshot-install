@@ -99,7 +99,7 @@ def extract(tar_url, extract_path='./extract'):
             if str(args.tgz).lower() == "download" :
                 # Delete TGZ file
                 deleteIfExists(tar_url, False)
-                print("Deleted downloaded tgz file: '" + blueText + str + defText + "'")
+                print("Deleted downloaded tgz file: '" + blueText + str(tar_url) + defText + "'")
             return extract_path + "/" + dir_list[0]
 
     else:
