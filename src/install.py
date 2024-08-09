@@ -1,26 +1,5 @@
 #!/usr/bin/env python3
 
-# simple script to handle an install of a graylog snapshot via .tgz
-# https://jenkins.ci.torch.sh/job/Graylog-Snapshots/job/graylog2-server/job/master/
-
-# TASKS
-# 1. extract contents of .tgz
-# 
-# 2. get name of extracted folder
-# 
-# 3. copy/move files to proper path
-#   * /usr/share/graylog-server/bin
-#   * /etc/default/graylog-server
-#   * /var/lib/graylog-server/journal
-#   * /var/log/graylog-server/
-#   https://go2docs.graylog.org/5-0/setting_up_graylog/default_file_locations.html
-# 
-# 4. configure server.conf
-#   * /etc/graylog/server/server.conf
-# 
-# 5. create service
-# 
-
 import argparse
 import shutil
 import os
