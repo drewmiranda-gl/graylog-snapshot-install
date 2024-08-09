@@ -117,6 +117,10 @@ def extract(tar_url, extract_path='./extract'):
         dir_list = listdirs(extract_path)
         if len(dir_list) > 0:
             print(successText + "Successfully extracted to " + blueText + extract_path + "/" + dir_list[0] + defText)
+            if str(args.tgz).lower() == "download" :
+                # Delete TGZ file
+                deleteIfExists(tar_url, False)
+                print("Deleted downloaded tgz file: '" + blueText + str + defText + "'")
             return extract_path + "/" + dir_list[0]
 
     else:
@@ -585,6 +589,7 @@ if args.erase_opensearch == True:
 # =============================================================================
 # 1. Extract .tgz and get path
 if str(args.tgz).lower() == "download" :
+
     print("Downloading latest Graylog snapshot...")
     graylog_snapshot_tgz_file = do_download_build_from_downloads_graylog_org("graylog-enterprise-linux-x64", args.overwrite_download)
 
@@ -595,6 +600,7 @@ if not exists(graylog_snapshot_tgz_file):
 extracted_path = extract(graylog_snapshot_tgz_file)
 # extracted_path = "./extract/graylog-5.1.0-SNAPSHOT-20230331094000-linux-x64"
 # print("Extracted Path: " + extracted_path)
+
 
 # 2. move to correct path
 move_to_path(extracted_path, "/usr/share/graylog-server")
