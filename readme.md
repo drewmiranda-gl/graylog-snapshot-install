@@ -4,16 +4,31 @@ This is an "installer" for graylog using a `.tgz` build or snapshot.
 
 Its intention is to be used with snapshot builds since official releases can be installed via linux packages.
 
-Quick, easy, straight to the point:
+## Install
+
+The first time you run this:
 
 ```shell
 sudo python3 install.py --tgz download --install-openjdk --install-opensearch --install-mongod
 ```
 
+* Downloads the latest snapshot `.tgz` file
+* Installs OpenJDK
+* Installs OpenSearch
+* Installs MongoD
+
 If you need to install pip and pip reqs:
 ```shell
 sudo apt update && sudo apt install python3-pip
 sudo python3 -m pip install -r requirements.txt --ignore-installed
+```
+
+## Update
+
+If you've already installed everything and just want to update to the latest snapshot:
+
+```shell
+sudo python3 install.py --tgz download --erase-mongodb --erase-opensearch
 ```
 
 # Prerequisites
