@@ -28,8 +28,12 @@ sudo python3 -m pip install -r requirements.txt --ignore-installed
 If you've already installed everything and just want to update to the latest snapshot:
 
 ```shell
-sudo python3 install.py --tgz download --erase-mongodb --erase-opensearch
+sudo systemctl stop graylog-server && sudo python3 install.py --tgz download --erase-mongodb --erase-opensearch
 ```
+
+## Troubleshooting
+
+If Graylog fails to start, inspect `/
 
 # Prerequisites
 
