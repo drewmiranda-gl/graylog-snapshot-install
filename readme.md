@@ -33,7 +33,11 @@ sudo systemctl stop graylog-server && sudo python3 install.py --tgz download --e
 
 ## Troubleshooting
 
-If Graylog fails to start, inspect `/
+If Graylog fails to start, inspect `/var/log/graylog-server/server.log`
+
+```sh
+tail -fF /var/log/graylog-server/server.log
+```
 
 # Prerequisites
 
