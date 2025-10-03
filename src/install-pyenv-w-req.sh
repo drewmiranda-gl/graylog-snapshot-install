@@ -56,3 +56,5 @@ source venv/bin/activate
 python3 -m pip install -r requirements.txt --force-reinstall
 
 deactivate
+
+chmod +x *.sh
