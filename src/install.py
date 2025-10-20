@@ -10,6 +10,9 @@ import subprocess
 from os.path import exists
 from requests.auth import HTTPBasicAuth
 from tqdm import tqdm
+import signal
+import sys
+signal.signal(signal.SIGINT, lambda x, y: sys.exit(0))
 
 parser = argparse.ArgumentParser(description="Just an example",
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
