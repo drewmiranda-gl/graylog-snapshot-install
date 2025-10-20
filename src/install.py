@@ -10,6 +10,8 @@ import subprocess
 from os.path import exists
 from requests.auth import HTTPBasicAuth
 from tqdm import tqdm
+import platform
+
 import signal
 import sys
 signal.signal(signal.SIGINT, lambda x, y: sys.exit(0))
@@ -537,6 +539,20 @@ if args.install_mongod == True:
     time.sleep(10)
 
 # =============================================================================
+# -1. Operating System
+b_is_linux = False
+os_name = platform.system()
+if os_name == "Windows":
+    print("Running on Windows.")
+elif os_name == "Linux":
+    print("Running on Linux.")
+    b_is_linux = True
+elif os_name == "Darwin":  # macOS
+    print("Running on macOS.")
+else:
+    print("Running on an unknown OS.")
+
+# =============================================================================
 # 0. get needed files
 
 # graylog-server-jvm-def
@@ -578,6 +594,11 @@ if str(args.tgz).lower() == "download" :
 
 if not exists(graylog_snapshot_tgz_file):
     print(errorText + "ERROR! snapshot tgz file " + blueText + str(graylog_snapshot_tgz_file) + errorText + " does not exist!" + defText)
+    exit(1)
+
+# we need to stop here if we are not running on linux
+if b_is_linux == False:
+    print(errorText + "ERROR! This scirpt downloads and installs Graylog Snapshots, but the current Operating System is not supported. Please run this on linux." + defText)
     exit(1)
 
 extracted_path = extract(graylog_snapshot_tgz_file)
