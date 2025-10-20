@@ -446,6 +446,7 @@ def do_download_build_from_downloads_graylog_org(build_artifact: str, overwrite:
 
     url = url_to_download
     # Streaming, so we can iterate over the response.
+    print(alertText + "url: " + defText + blueText + str(url) + defText)
     response = requests.get(url, stream=True)
     total_size_in_bytes= int(response.headers.get('content-length', 0))
     block_size = 1024 #1 Kibibyte
