@@ -667,6 +667,10 @@ print("    data_dir: " + blueText + "/var/lib/graylog-server" + defText)
 sedcmd = "sed -i 's/data_dir = .*/data_dir = \/var\/lib\/graylog-server/g' /etc/graylog/server/server.conf"
 os.system(sedcmd)
 
+print("    node_id: " + blueText + "/var/lib/graylog-server/node-id" + defText)
+sedcmd = "sed -i 's/node_id_file = .*/node_id_file = \/var\/lib\/graylog-server\/node-id/g' /etc/graylog/server/server.conf"
+os.system(sedcmd)
+
 print("    message_journal_dir: " + blueText + "/var/lib/graylog-server/journal" + defText)
 sedcmd = "sed -i 's/message_journal_dir = .*/message_journal_dir = \/var\/lib\/graylog-server\/journal/g' /etc/graylog/server/server.conf"
 os.system(sedcmd)
@@ -683,9 +687,6 @@ os.system("cp -f graylog-server-jvm-def /etc/default/graylog-server")
 # journal and data dirs
 print("create journal dir: " + blueText + "/var/lib/graylog-server/journal/" + defText)
 os.system("mkdir -p /var/lib/graylog-server/journal/")
-
-print("create node-id dir: " + blueText + "/var/lib/graylog-server/data/node-id/" + defText)
-os.system("mkdir -p /var/lib/graylog-server/data/node-id/")
 
 # check if we are missing bundled JVM
 bundled_jvm_target_path = "/usr/share/graylog-server/jvm"
