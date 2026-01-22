@@ -684,8 +684,8 @@ os.system("cp -f graylog-server-jvm-def /etc/default/graylog-server")
 print("create journal dir: " + blueText + "/var/lib/graylog-server/journal/" + defText)
 os.system("mkdir -p /var/lib/graylog-server/journal/")
 
-print("create nested data dir: " + blueText + "/var/lib/graylog-server/data/" + defText)
-os.system("mkdir -p /var/lib/graylog-server/data/")
+print("create node-id dir: " + blueText + "/var/lib/graylog-server/data/node-id/" + defText)
+os.system("mkdir -p /var/lib/graylog-server/data/node-id/")
 
 # check if we are missing bundled JVM
 bundled_jvm_target_path = "/usr/share/graylog-server/jvm"
