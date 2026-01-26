@@ -709,6 +709,11 @@ os.system("cp -f graylog-server-jvm-def /etc/default/graylog-server")
 print("create journal dir: " + blueText + "/var/lib/graylog-server/journal/" + defText)
 os.system("mkdir -p /var/lib/graylog-server/journal/")
 
+# integrations_scripts_dir
+print("create integrations_scripts_dir dir: " + blueText + "/usr/share/graylog-server/scripts/" + defText)
+os.system("mkdir -p /usr/share/graylog-server/scripts/")
+
+
 # check if we are missing bundled JVM
 bundled_jvm_target_path = "/usr/share/graylog-server/jvm"
 bundled_jvm_tgz = "gl-jvm.tar.gz"
