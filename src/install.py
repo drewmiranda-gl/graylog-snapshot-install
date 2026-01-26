@@ -467,7 +467,28 @@ def do_download_build_from_downloads_graylog_org(build_artifact: str, overwrite:
     print(successText + "Downloaded file successfully: " + blueText + local_filename + defText)
     return local_filename
 
+def get_repo_def_branch(owner: str, repo: str) -> str:
 
+    url = f"https://api.github.com/repos/{owner}/{repo}"
+
+    headers = {
+        "Accept": "application/vnd.github+json",
+    }
+
+    try:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+
+        data = response.json()
+        default_branch = data["default_branch"]
+        return default_branch
+    
+    except Exception as e:
+        print(errorText + f"ERROR! Failed to fetch default repo for {owner}/{repo}" + defText)
+        fallback_def = "7.1"
+        # fallback_def = "6.0"
+
+    return fallback_def
 
 
 
@@ -555,13 +576,17 @@ else:
 # =============================================================================
 # 0. get needed files
 
+# get latest/default branch
+fpm_def_branch = get_repo_def_branch("Graylog2", "fpm-recipes")
+print("Attempting to download required build files from github repo using branch: " + blueText + fpm_def_branch + defText + "")
+
 # graylog-server-jvm-def
-download_file_via_github("https://raw.githubusercontent.com/Graylog2/fpm-recipes/6.0/recipes/graylog-server/files/environment", "graylog-server-jvm-def")
-download_file_via_github("https://raw.githubusercontent.com/Graylog2/fpm-recipes/6.0/recipes/graylog-server/files/graylog-server.sh", "graylog-server")
-download_file_via_github("https://raw.githubusercontent.com/Graylog2/fpm-recipes/6.0/recipes/graylog-server/files/systemd.service", "graylog-server.service")
-download_file_via_github("https://raw.githubusercontent.com/Graylog2/fpm-recipes/6.0/recipes/graylog-server/files/log4j2.xml", "log4j2.xml")
-download_file_via_github("https://raw.githubusercontent.com/Graylog2/graylog2-server/master/misc/graylog.conf", "server.conf")
-download_file_via_github("https://raw.githubusercontent.com/Graylog2/fpm-recipes/6.0/recipes/graylog-server/patches/graylog-server.conf.patch", "graylog-server.conf.patch")
+download_file_via_github(f"https://raw.githubusercontent.com/Graylog2/fpm-recipes/{fpm_def_branch}/recipes/graylog-server/files/environment", "graylog-server-jvm-def")
+download_file_via_github(f"https://raw.githubusercontent.com/Graylog2/fpm-recipes/{fpm_def_branch}/recipes/graylog-server/files/graylog-server.sh", "graylog-server")
+download_file_via_github(f"https://raw.githubusercontent.com/Graylog2/fpm-recipes/{fpm_def_branch}/recipes/graylog-server/files/systemd.service", "graylog-server.service")
+download_file_via_github(f"https://raw.githubusercontent.com/Graylog2/fpm-recipes/{fpm_def_branch}/recipes/graylog-server/files/log4j2.xml", "log4j2.xml")
+download_file_via_github(f"https://raw.githubusercontent.com/Graylog2/graylog2-server/master/misc/graylog.conf", "server.conf")
+download_file_via_github(f"https://raw.githubusercontent.com/Graylog2/fpm-recipes/{fpm_def_branch}/recipes/graylog-server/patches/graylog-server.conf.patch", "graylog-server.conf.patch")
 patch_file("server.conf", "graylog-server.conf.patch")
 
 # =============================================================================
@@ -665,10 +690,6 @@ os.system(sedcmd)
 
 print("    data_dir: " + blueText + "/var/lib/graylog-server" + defText)
 sedcmd = "sed -i 's/data_dir = .*/data_dir = \/var\/lib\/graylog-server/g' /etc/graylog/server/server.conf"
-os.system(sedcmd)
-
-print("    node_id: " + blueText + "/var/lib/graylog-server/node-id" + defText)
-sedcmd = "sed -i 's/node_id_file = .*/node_id_file = \/var\/lib\/graylog-server\/node-id/g' /etc/graylog/server/server.conf"
 os.system(sedcmd)
 
 print("    message_journal_dir: " + blueText + "/var/lib/graylog-server/journal" + defText)
